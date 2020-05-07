@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import Firebase
 
 class NexyViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
 
@@ -59,6 +60,14 @@ class NexyViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             userImage = UIImage(data: userImageData)!
         }
     }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+    }
+    
+    
     
     
     
@@ -211,6 +220,71 @@ class NexyViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         picker.dismiss(animated: true, completion: nil)
         
     }
+    
+    
+    // データベースから値をとる
+    func fetchContentData(){
+        
+        let ref = Database.database().reference().child("timeLine").queryLimited(toLast: 100).queryOrdered(byChild:"postData").observe(.value){
+            (snapShot) in
+            
+            self.contentsArray.removeAll()
+            
+            if let snapShot = snapShot.children.allObjects as? [DataSnapshot]{
+                
+                
+                for snap in snapShot{
+                
+                    // 辞書型
+                    if let postData = snap.value as? [String:Any]{
+                    
+                        let userName = postData["userName"] as? String
+                        let userprofileImage = postData["userprofileImage"] as? String
+                        let contents = postData["contents"] as? String
+                        let comment = postData["comment"] as? String
+                        var postDate : CLong?
+                        
+                        if let postedDate = postData["postDate"] as? CLong{
+                            
+                            postDate = postedDate
+                            
+                        }
+                        
+                        // postDateを時間に変換する
+                        let timeString = self.convertTimeStamp(serverTimeStamp: postDate!)
+                        
+                        
+                        self.contentsArray.append(Contents(userNameString: userName!, profileImageString: userprofileImage!, contentImageString: comment!, commentString: comment!, postDateString: timeString))
+                        
+                        
+                    }
+                }
+                
+                self.timeLineTableView.reloadData()
+                let indexPath = IndexPath(row: self.contentsArray.count - 1,section: 0)
+                
+                if self.contentsArray.count >= 5{
+                    
+                    self.timeLineTableView.scrollToRow(at: indexPath, at: .bottom,animated: true)
+                }
+            }
+        }
+    }
+    
+    
+    
+    func convertTimeStamp(serverTimeStamp:CLong) ->String{
+        
+        let x = serverTimeStamp / 1000
+        let date = Date(timeIntervalSince1970:TimeInterval(x))
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.timeStyle = .medium
+        
+        return formatter.string(from: date)
+    }
+    
+    
     
 
 }
