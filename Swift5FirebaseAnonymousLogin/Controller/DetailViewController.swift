@@ -53,9 +53,10 @@ class DetailViewController: UIViewController {
 
     @IBAction func shareAction(_ sender: Any) {
         
-        let items = [contentsImageView.image] as Any
         
-        let acView = UIActivityViewController(activityItems:[items], applicationActivities:nil)
+        let items = [contentsImageView.image] as [Any]
+        
+        let acView = UIActivityViewController(activityItems:items, applicationActivities:nil)
         
         present(acView, animated:  true, completion: nil)
     }
