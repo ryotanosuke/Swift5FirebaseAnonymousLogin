@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7EF329F590B14704E9B1AADC /* Pods_Swift5FirebaseAnonymousLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09FB7F8A31FB89C2D31505EF /* Pods_Swift5FirebaseAnonymousLogin.framework */; };
 		CE801E892463DFD80063417D /* EditAndPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE801E882463DFD80063417D /* EditAndPostViewController.swift */; };
+		CE801E8B2464440D0063417D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE801E8A2464440D0063417D /* DetailViewController.swift */; };
 		CE84F24B24629E5A00761D4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84F24A24629E5A00761D4C /* AppDelegate.swift */; };
 		CE84F24D24629E5A00761D4C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84F24C24629E5A00761D4C /* SceneDelegate.swift */; };
 		CE84F25224629E5A00761D4C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE84F25024629E5A00761D4C /* Main.storyboard */; };
@@ -25,6 +26,7 @@
 		09FB7F8A31FB89C2D31505EF /* Pods_Swift5FirebaseAnonymousLogin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Swift5FirebaseAnonymousLogin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D9C7755AAB00DB83CB28E60 /* Pods-Swift5FirebaseAnonymousLogin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swift5FirebaseAnonymousLogin.debug.xcconfig"; path = "Target Support Files/Pods-Swift5FirebaseAnonymousLogin/Pods-Swift5FirebaseAnonymousLogin.debug.xcconfig"; sourceTree = "<group>"; };
 		CE801E882463DFD80063417D /* EditAndPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAndPostViewController.swift; sourceTree = "<group>"; };
+		CE801E8A2464440D0063417D /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		CE84F24724629E5A00761D4C /* Swift5FirebaseAnonymousLogin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swift5FirebaseAnonymousLogin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE84F24A24629E5A00761D4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE84F24C24629E5A00761D4C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				CE84F2652462B74B00761D4C /* InputViewController.swift */,
 				CE84F2672462BFF400761D4C /* NexyViewController.swift */,
 				CE801E882463DFD80063417D /* EditAndPostViewController.swift */,
+				CE801E8A2464440D0063417D /* DetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				CE84F26A24632ABF00761D4C /* Contents.swift in Sources */,
 				CE84F2682462BFF400761D4C /* NexyViewController.swift in Sources */,
 				CE84F2662462B74B00761D4C /* InputViewController.swift in Sources */,
+				CE801E8B2464440D0063417D /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

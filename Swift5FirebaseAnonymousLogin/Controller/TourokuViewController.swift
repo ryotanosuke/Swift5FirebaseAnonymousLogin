@@ -21,10 +21,10 @@ class TourokuViewController: UIViewController {
     @IBAction func login(_ sender: Any) {
         
         // 匿名認証
-//        Auth.auth().signInAnonymously { (authResult, error) in
+        Auth.auth().signInAnonymously { (authResult, error) in
             
-//            let user = authResult?.user
-//            print(user)
+            let user = authResult?.user
+            print(user)
             
             // セグエじゃない画面遷移
             let inputVC = self.storyboard?.instantiateViewController(identifier: "inputVC") as! InputViewController
@@ -32,7 +32,7 @@ class TourokuViewController: UIViewController {
             // showの遷移を可能にする
             self.navigationController?.pushViewController(inputVC, animated: true)
             
-//        }
+        }
         
         
         

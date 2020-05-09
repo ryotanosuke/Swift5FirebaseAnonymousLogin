@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 import Firebase
+import Photos
 
 class NexyViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
 
@@ -28,6 +29,8 @@ class NexyViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     var userImage = UIImage()
     
+    var commentString = String()
+    
     var createData = String()
     
     var contentImageString = String()
@@ -40,6 +43,30 @@ class NexyViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        PHPhotoLibrary.requestAuthorization { (status) in
+            
+            switch(status){
+                
+            case .authorized:
+                
+                print("許可されています")
+                
+            case .denied:
+                
+                print("拒否されています")
+                
+            case .notDetermined:
+                
+                print("notDetermined")
+                
+            case .restricted:
+                
+                print("restricted")
+            }
+        }
+        
+        
         
         timeLineTableView.delegate = self
         
@@ -62,12 +89,13 @@ class NexyViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     
     
+    
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
+
+        fetchContentData()
     }
-    
-    
     
     
     
@@ -76,6 +104,33 @@ class NexyViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         contentsArray.count
     }
     
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        userName = contentsArray[indexPath.row].userNameString
+        
+        commentString = contentsArray[indexPath.row].commentString
+        
+        createData = contentsArray[indexPath.row].postDateString
+        
+        contentImageString = contentsArray[indexPath.row].contentImageString
+        
+        userProfileImageString = contentsArray[indexPath.row].profileImageString
+        
+        performSegue(withIdentifier: "detail" , sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let detailVC = segue.destination as! DetailViewController
+        
+        detailVC.userName = userName
+        detailVC.comment = commentString
+        detailVC.date = createData
+        detailVC.profileImage = userProfileImageString
+        detailVC.contentImage = contentImageString
+    }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -128,8 +183,6 @@ class NexyViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
        
         // アラート　or アクションシート
         showAlert()
-        
-        
     }
     
     // カメラ立ち上げ
@@ -218,14 +271,13 @@ class NexyViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
         // ピッカーを閉じる
         picker.dismiss(animated: true, completion: nil)
-        
     }
     
     
     // データベースから値をとる
     func fetchContentData(){
         
-        let ref = Database.database().reference().child("timeLine").queryLimited(toLast: 100).queryOrdered(byChild:"postData").observe(.value){
+        let ref = Database.database().reference().child("timeLine").queryLimited(toLast: 100).queryOrdered(byChild:"postDate").observe(.value){
             (snapShot) in
             
             self.contentsArray.removeAll()
@@ -239,7 +291,7 @@ class NexyViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                     if let postData = snap.value as? [String:Any]{
                     
                         let userName = postData["userName"] as? String
-                        let userprofileImage = postData["userprofileImage"] as? String
+                        let userProfileImage = postData["userProfileImage"] as? String
                         let contents = postData["contents"] as? String
                         let comment = postData["comment"] as? String
                         var postDate : CLong?
@@ -254,13 +306,13 @@ class NexyViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                         let timeString = self.convertTimeStamp(serverTimeStamp: postDate!)
                         
                         
-                        self.contentsArray.append(Contents(userNameString: userName!, profileImageString: userprofileImage!, contentImageString: comment!, commentString: comment!, postDateString: timeString))
-                        
+                        self.contentsArray.append(Contents(userNameString: userName!, profileImageString: userProfileImage!, contentImageString: comment!, commentString: comment!, postDateString: timeString))
                         
                     }
                 }
                 
                 self.timeLineTableView.reloadData()
+                
                 let indexPath = IndexPath(row: self.contentsArray.count - 1,section: 0)
                 
                 if self.contentsArray.count >= 5{
