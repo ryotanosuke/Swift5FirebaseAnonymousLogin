@@ -23,10 +23,12 @@ class NexyViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     //　ユーザーコンテンツ
     var selectedImage = UIImage()
     
+    // デフォルトの値を代入
     var userName = String()
     
     var userImageData = Data()
     
+    // デフォルトの値を代入
     var userImage = UIImage()
     
     var commentString = String()
@@ -98,14 +100,14 @@ class NexyViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     
     
-    
+    // セルの数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         contentsArray.count
     }
     
     
-    
+    // セルをタップした時の処理
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         userName = contentsArray[indexPath.row].userNameString
@@ -133,6 +135,7 @@ class NexyViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     
     
+    // セルの構築
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = timeLineTableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
@@ -143,6 +146,7 @@ class NexyViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         let profileImageView = cell.viewWithTag(1) as! UIImageView
         
         // indexPath.rowはセルの行のこと
+        // URL画像として認識
         profileImageView.sd_setImage(with: URL(string: contentsArray[indexPath.row].profileImageString), completed: nil)
         profileImageView.layer.cornerRadius = 30.0
         
@@ -159,19 +163,21 @@ class NexyViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         contentsImageView.sd_setImage(with: URL(string: contentsArray[indexPath.row].contentImageString), completed: nil)
         
         // コメントラベル
-        let commentLabel = cell.viewWithTag(2) as! UILabel
+        let commentLabel = cell.viewWithTag(5) as! UILabel
         commentLabel.text = contentsArray[indexPath.row].commentString
         
         return cell
 
     }
     
+    
+    // セルの高さ
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         return 515
     }
     
-
+    // セクションの数
     func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
@@ -277,7 +283,7 @@ class NexyViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     // データベースから値をとる
     func fetchContentData(){
         
-        let ref = Database.database().reference().child("timeLine").queryLimited(toLast: 100).queryOrdered(byChild:"postDate").observe(.value){
+        let ref = Database.database().reference().child("timeLine").queryLimited(toLast: 100).queryOrdered(byChild:"postData").observe(.value){
             (snapShot) in
             
             self.contentsArray.removeAll()
@@ -306,7 +312,8 @@ class NexyViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                         let timeString = self.convertTimeStamp(serverTimeStamp: postDate!)
                         
                         
-                        self.contentsArray.append(Contents(userNameString: userName!, profileImageString: userProfileImage!, contentImageString: comment!, commentString: comment!, postDateString: timeString))
+                        //　Contentsクラスに、フェッチした値を格納
+                        self.contentsArray.append(Contents(userNameString: userName!, profileImageString: userProfileImage!, contentImageString: contents!, commentString: comment!, postDateString: timeString))
                         
                     }
                 }
@@ -315,7 +322,9 @@ class NexyViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                 
                 let indexPath = IndexPath(row: self.contentsArray.count - 1,section: 0)
                 
-                if self.contentsArray.count >= 5{
+                // 下のタイムラインを表示
+                // 5から０に変更
+                if self.contentsArray.count >= 0{
                     
                     self.timeLineTableView.scrollToRow(at: indexPath, at: .bottom,animated: true)
                 }

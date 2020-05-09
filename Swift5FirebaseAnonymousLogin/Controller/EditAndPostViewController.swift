@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class EditAndPostViewController: UIViewController , UITextViewDelegate {
+class EditAndPostViewController: UIViewController, UITextFieldDelegate {
 
     
     var passedImage = UIImage()
@@ -24,9 +24,8 @@ class EditAndPostViewController: UIViewController , UITextViewDelegate {
     @IBOutlet weak var userProfileImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var contentImageView: UIImageView!
-    @IBOutlet weak var commentTextFiled: UITextView!
     @IBOutlet weak var sendButton: UIButton!
-    
+    @IBOutlet weak var commentTextFiled: UITextField!
     
     
     override func viewDidLoad() {
@@ -127,9 +126,11 @@ class EditAndPostViewController: UIViewController , UITextViewDelegate {
     // 送信ボタン
     @IBAction func postAction(_ sender: Any) {
         
+        // データベースの格納庫
         let timeLineDB = Database.database().reference().child("timeLine").childByAutoId()
         
         
+        // フォルダ(FireBase側のデータ格納庫）
         let key = timeLineDB.child("Users").childByAutoId().key
         let key2 = timeLineDB.child("Contents").childByAutoId().key
         

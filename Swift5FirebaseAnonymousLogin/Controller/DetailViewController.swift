@@ -36,12 +36,14 @@ class DetailViewController: UIViewController {
         
         shareButton.layer.cornerRadius = 20.0
         
+        // URL型に変換して反映
         profileImageView.sd_setImage(with: URL(string:profileImage), completed: nil)
         
         userNameLabel.text = userName
                 
         dateLabel.text = date
         
+        // URL型に変換して反映
         contentsImageView.sd_setImage(with:URL(string: contentImage),completed:nil)
         
         commentLabel.text = comment
