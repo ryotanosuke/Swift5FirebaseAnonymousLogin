@@ -18,10 +18,13 @@ git clone のみでシミュレーション可能です。
 
 <img width="435" alt="スクリーンショット 2020-05-17 20 01 54" src="https://user-images.githubusercontent.com/64144316/82143433-f0b64600-987e-11ea-912f-5e5058675f57.png">
 
-カメラボタンを押すことにより、画像と呟きの投稿が可能になります。
+右下のカメラボタンを押すことにより、画像と呟きの投稿が可能になります。
 
+<img width="436" alt="スクリーンショット 2020-05-17 20 02 34" src="https://user-images.githubusercontent.com/64144316/82143515-789c5000-987f-11ea-96f8-ded2ba2765fd.png">
 
-画像をタップすると、ツイッターなどのシェアが可能です。
+投稿の画像をタップすることにより、ツイッターなどにシェアが可能です。
+
+<img width="437" alt="スクリーンショット 2020-05-17 20 02 56" src="https://user-images.githubusercontent.com/64144316/82143520-83ef7b80-987f-11ea-9d04-3b6d3a63ec4a.png">
 
 
 # References
