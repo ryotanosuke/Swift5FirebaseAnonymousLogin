@@ -14,7 +14,7 @@ git clone のみでシミュレーション可能です。
 
 <img width="433" alt="スクリーンショット 2020-05-17 20 01 38" src="https://user-images.githubusercontent.com/64144316/82143430-ebf19200-987e-11ea-9021-79140286f6a5.png">
 
-決定ボタン押下後、掲示板に入室いたします。
+アイコンを選択し、名前を入力します。決定ボタン押下後、掲示板に入室可能。
 
 <img width="435" alt="スクリーンショット 2020-05-17 20 01 54" src="https://user-images.githubusercontent.com/64144316/82143433-f0b64600-987e-11ea-912f-5e5058675f57.png">
 
