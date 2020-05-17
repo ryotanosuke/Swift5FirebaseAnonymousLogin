@@ -26,7 +26,7 @@ git clone のみでシミュレーション可能です。
 
 Udemy iOS講座 https://www.udemy.com/course/ios13_swift5_iphone_ios_boot_camp/
 
-＃Learn
+# Learn
 
 当該アプリにより、デリゲート、テーブルビュー、クロージャー、Cloudとの連携等、非常に重要な概念を学びました。
 
